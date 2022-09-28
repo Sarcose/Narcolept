@@ -18,10 +18,10 @@ rand = love.math.random
 
 --[[======AESTHETICS======]]
 fonts = {}
-lsize = 20*3
-fsize = 18*3
-msize = 16*3
-ssize = 12*3
+lsize = 60
+fsize = 18
+msize = 16
+ssize = 12
 fonts.defaultfont = lg.newFont(fsize)
 fonts.defaultfont_m = lg.newFont(msize)
 fonts.defaultfont_s = lg.newFont(ssize)
@@ -126,6 +126,7 @@ function state:draw()
     end)
   end 
   lg.setCanvas()
+  --lg.clear()
 end
 
 function love.load()
@@ -166,6 +167,9 @@ function love.draw()
     {WINDOW},
     stencil = true
   })
+ -- lg.setBackgroundColor(0.1,0.1,0.2,1)
+  lg.setColor(1,1,1,1)
+  lg.clear()
 
   state:draw()
 end

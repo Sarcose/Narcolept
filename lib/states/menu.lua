@@ -7,27 +7,25 @@ function o:load()
 	self.state = {}
 	self.state[1] = {
 		life = 1, 
-		x = GAME_W/2 - _G.fonts.futurefont_l:getWidth('Game Crash Presents')/2,
-		y = GAME_H/2 - _G.fonts.futurefont_l:getHeight('Game Crash Presents')/2,
-		text = '[font=futurefont_l][textspeed = 0.01][raindrop=0.4]'..colorhex('dark_orchid')..'Game Crash Presents',
+		y = GAME_H/2,
+		text = '[scale=2][font=futurefont_l][skip][raindrop=0.4]'..colorhex('dark_orchid')..'Game Crash Presents',
 		wait = 1,
 	}
 	self.state[2] = {
 		life = 3, 
-		x = GAME_W/2 - _G.fonts.futurefont_l:getWidth('A tiny game')/2,
-		y = GAME_H/2 - _G.fonts.futurefont_l:getHeight('A')/2,
 		wait = 1.4,
+		y = GAME_H/2,
 		}
-	self.state[2].text = '[font=futurefont_l][textspeed = 0][shake]'..colorhex('pale_green')..'A tiny game'
+	self.state[2].text = '[scale=1.5][font=futurefont_l][skip][textspeed = 0][shake]'..colorhex('pale_green')..'A tiny game'
 	self.state[3] = {
-		x = GAME_W/2 - _G.fonts.digivolve_l:getWidth('N A R C O L E P T O R')/2,
-		y = GAME_H/2 - _G.fonts.digivolve_l:getHeight('A')/2,
 		life=4,
 		wait=100,	
-		text = '[font=vengeance]'..colorhex('violet')..'[bounce=30]N A R C O L E P T O R'
+		y = 100,
+		text = '[scale=2][font=digivolve_l]'..colorhex('violet')..'[bounce=30]N A R C O L E P T O R'
 	}
-	self.state[self.cs].a_text = SText.new()
+	self.state[self.cs].a_text = SText.new("center")
 	self.state[self.cs].a_text:send(self.state[self.cs].text)
+	self.state[self.cs].x = GAME_W/2 - self.state[self.cs].a_text.get.width/2
 
 	self.background = {
 		draw = function(self)
@@ -38,8 +36,9 @@ function o:load()
 end
 
 function o:setupTextBox()
-	self.state[self.cs].a_text = SText:new()
+	self.state[self.cs].a_text = SText:new("center")
 	self.state[self.cs].a_text:send(self.state[self.cs].text)
+	self.state[self.cs].x = GAME_W/2 - self.state[self.cs].a_text.get.width/2
 end
 
 function o:update(dt)
@@ -84,8 +83,8 @@ function o:update(dt)
 	end
 end
 function o:draw()
-	--self.background:draw()
-	self.state[self.cs].a_text:draw(self.state[self.cs].x,self.state[self.cs].y)
+	self.background:draw()
+	self.state[self.cs].a_text:draw(0,0)--self.state[self.cs].x,self.state[self.cs].y)
 	lg.rectangle('line',0,0,GAME_W,GAME_H)
 end
 function o:drawParticles()
